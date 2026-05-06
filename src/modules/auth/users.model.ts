@@ -9,4 +9,9 @@ export const UserTable = async () => {
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`;
   await pool.query(query);
+
+  await pool.query(`
+    ALTER TABLE users
+    ADD COLUMN IF NOT EXISTS password TEXT
+  `);
 };
