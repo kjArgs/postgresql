@@ -1,7 +1,7 @@
 import app from "./app";
 import dotenv from "dotenv";
 import pool from "@/config/db";
-import { createUserTable } from "./tables";
+import { createUSerSession, createUserTable } from "./tables";
 
 dotenv.config();
 
@@ -14,6 +14,7 @@ const startServer = async () => {
 
     //create tables
     await createUserTable();
+    await createUSerSession();
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
