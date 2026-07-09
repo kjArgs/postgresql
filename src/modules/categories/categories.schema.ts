@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 //define category status
-export const CATEGORY_STATUS = ["Active", "Inactive"] as const;
+export const CATEGORY_STATUS = ["ACTIVE", "INACTIVE"] as const;
 
 //define the schema
 export const categorySchema = z.object({
@@ -23,5 +23,5 @@ export type searchCategorySchemaTypes = z.infer<typeof searchCategorySchema>;
 export type categoryStatusType = (typeof CATEGORY_STATUS)[number];
 export type categoryFilterType = {
   search?: string;
-  status?: searchCategorySchemaTypes;
+  status?: categoryStatusType;
 };

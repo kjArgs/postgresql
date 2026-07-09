@@ -1,27 +1,23 @@
 import app from "./app";
-import dotenv from "dotenv";
-import pool from "@/config/db";
-import { createUSerSession, createUserTable } from "./tables";
+import { db } from "../src/config/db";
+import { sql } from "kysely";
+import { createRoutes } from "./routes";
 
-dotenv.config();
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {
-    await pool.query("SELECT NOW()");
-    console.log("PostgreSQL connected");
+    await sql`select 1`.execute(db);
 
-    //create tables
-    await createUserTable();
-    await createUSerSession();
+    console.log("Database connected");
+
+    createRoutes(app);
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Database connection failed:", error);
-    process.exit(1);
+    console.error(error);
   }
 };
 
