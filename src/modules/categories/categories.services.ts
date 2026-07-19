@@ -1,6 +1,4 @@
 import {
-  categoryStatusType,
-  searchCategorySchema,
   searchCategorySchemaTypes,
   categoryFilterType,
   categoryInput,
@@ -37,9 +35,10 @@ export const getCategoryById = async (id: number) => {
   }
 };
 
-
 export const createCategory = async (category: categoryInput) => {
-  const existing = await CategoryRepository.createCategory(category.category_name);
+  const existing = await CategoryRepository.createCategory(
+    category.category_name,
+  );
 
   if (!existing) {
     throw new AppError("Category already exists", 400, "existing");
@@ -77,11 +76,11 @@ export const toggleCategoryStatus = async (id: number) => {
 };
 
 export const deleteCategory = async (id: number) => {
-    const existing = await CategoryRepository.findById(id)
+  const existing = await CategoryRepository.findById(id);
 
-    if (!existing) {
-        throw new AppError('Category already exists', 400, 'existing')
-    }
+  if (!existing) {
+    throw new AppError("Category already exists", 400, "existing");
+  }
 
-    return await CategoryRepository.deleteCategory(id)
-}
+  return await CategoryRepository.deleteCategory(id);
+};

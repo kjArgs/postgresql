@@ -98,3 +98,4 @@ export const toggleCategoryStatus = async (
     .returningAll()
     .executeTakeFirst();
 };
+

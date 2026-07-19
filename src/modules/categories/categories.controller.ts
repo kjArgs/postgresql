@@ -6,7 +6,6 @@ import {
   updateCategorySchema,
 } from "./categories.schema";
 import { idParamSchema } from "@/utils/shared/common.schema";
-import { success } from "zod";
 
 export const createCategory = async (
   req: Request,
